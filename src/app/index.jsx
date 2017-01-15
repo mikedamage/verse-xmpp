@@ -10,7 +10,9 @@ injectTapEventPlugin();
 
 const App = (
   <Provider store={appStore}>
-    <div className="hello">Hello</div>
+    <MuiThemeProvider>
+      <div className="hello">Hello</div>
+    </MuiThemeProvider>
   </Provider>
 );
 
