@@ -1,9 +1,11 @@
 const path           = require('path');
 const TransferPlugin = require('transfer-webpack-plugin');
+const StatsPlugin    = require('stats-webpack-plugin');
 const webpack        = require('webpack');
 const srcPath        = path.join(__dirname, 'src');
 const buildPath      = path.join(__dirname, 'build');
 
+let profile = false;
 const production = process.env.NODE_ENV === 'production';
 const plugins    = [
   new webpack.EnvironmentPlugin([
@@ -28,6 +30,14 @@ if (production) {
     'transform-react-constant-elements',
     'transform-react-inline-elements'
   );
+}
+
+if (process.env.STATS) {
+  plugins.push(new StatsPlugin('stats.json', {
+    chunkModules: true
+  }));
+
+  profile = true;
 }
 
 module.exports = {
@@ -72,5 +82,9 @@ module.exports = {
     path: buildPath,
     filename: '[name].bundle.js'
   },
-  plugins
+  devServer: {
+    inline: true
+  },
+  plugins,
+  profile
 };

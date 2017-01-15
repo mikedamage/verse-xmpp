@@ -19,6 +19,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
+    "stats-webpack-plugin": "^0.4.3",
     "strophe.js": "^1.2.11",
     "strophejs-plugins": "0.0.7",
     "styletron-react": "^2.5.0"
@@ -38,6 +39,7 @@
     "webpack-dev-server": "^2.2.0-rc.0"
   },
   "scripts": {
-    "build": "webpack --config ./webpack.config.js --progress --colors"
+    "build": "webpack --config ./webpack.config.js --progress --colors",
+    "start": "webpack-dev-server --config ./webpack.config.js --content-base ./build/"
   }
 }
