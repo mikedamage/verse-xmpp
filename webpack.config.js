@@ -16,7 +16,7 @@ const plugins    = [
     { from: 'html' }
   ], srcPath)
 ];
-const babelPlugins = [];
+const babelPlugins = [ 'transform-runtime' ];
 
 if (production) {
   plugins.push(new webpack.optimize.UglifyJsPlugin({

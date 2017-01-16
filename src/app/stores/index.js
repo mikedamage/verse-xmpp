@@ -3,7 +3,8 @@ import thunk                                     from 'redux-thunk';
 import rootReducer                               from '../reducers/index';
 
 const stateStructure = {
-  messages: []
+  messages: [],
+  connection: {}
 };
 
 const middleware = compose(

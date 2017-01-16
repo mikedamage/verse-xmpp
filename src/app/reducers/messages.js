@@ -1,8 +1,8 @@
 export default function messages(state = [], action) {
   switch (action.type) {
-    case 'RECEIVE_MESSAGE':
+    case 'MESSAGE_RECEIVE':
       return [ ...state, action.data ];
-    case 'SEND_MESSAGE':
+    case 'MESSAGE_SEND':
       return [ ...state, action.data ];
   }
 
