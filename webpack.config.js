@@ -11,6 +11,9 @@ const plugins    = [
   new webpack.EnvironmentPlugin([
     'NODE_ENV'
   ]),
+  new webpack.ProvidePlugin({
+    strophe: 'strophe-core?fix-amd'
+  }),
   new webpack.optimize.OccurrenceOrderPlugin(),
   new TransferPlugin([
     { from: 'html' }
@@ -55,8 +58,15 @@ module.exports = {
       'strophe-md5': 'strophe.js/src/md5',
       'strophe-utils': 'strophe.js/src/utils',
       'strophe-polyfill': 'strophe.js/src/polyfills',
-      'strophe': 'strophe.js/src/wrapper'
-    }
+      'strophe': 'strophe.js/src/wrapper',
+      'strophe-helper': 'util/strophe-helper'
+    },
+    extensions: [
+      '.js',
+      '.jsx',
+      '.scss',
+      '.css',
+    ]
   },
   module: {
     loaders: [
@@ -74,13 +84,18 @@ module.exports = {
       },
       {
         test: /\?fix-amd$/,
-        loader: 'imports-loader?define=>false'
+        loader: 'imports-loader?define=>false,this=>window'
+      },
+      {
+        test: /strophejs-plugins/,
+        loader: 'imports-loader?Strophe=>strophe.Strophe'
       }
     ]
   },
   output: {
     path: buildPath,
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
+    libraryTarget: 'umd'
   },
   devServer: {
     inline: true
