@@ -1,3 +1,5 @@
+/*eslint camelcase:0 */
+
 const path           = require('path');
 const TransferPlugin = require('transfer-webpack-plugin');
 const StatsPlugin    = require('stats-webpack-plugin');
@@ -16,7 +18,8 @@ const plugins    = [
   }),
   new webpack.optimize.OccurrenceOrderPlugin(),
   new TransferPlugin([
-    { from: 'html' }
+    { from: 'html' },
+    { from: 'img', to: 'img' }
   ], srcPath)
 ];
 const babelPlugins = [ 'transform-runtime' ];
@@ -24,7 +27,8 @@ const babelPlugins = [ 'transform-runtime' ];
 if (production) {
   plugins.push(new webpack.optimize.UglifyJsPlugin({
     compress: {
-      warnings: false
+      warnings: false,
+      dead_code: true,
     },
     mangle: true
   }));
@@ -58,8 +62,7 @@ module.exports = {
       'strophe-md5': 'strophe.js/src/md5',
       'strophe-utils': 'strophe.js/src/utils',
       'strophe-polyfill': 'strophe.js/src/polyfills',
-      'strophe': 'strophe.js/src/wrapper',
-      'strophe-helper': 'util/strophe-helper'
+      'strophe': 'strophe.js/src/wrapper'
     },
     extensions: [
       '.js',
@@ -76,7 +79,14 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         query: {
           presets: [
-            'es2015',
+            [
+              'latest', {
+                es2015: {
+                  loose: true,
+                  modules: false
+                }
+              }
+            ],
             'react'
           ],
           plugins: babelPlugins
@@ -89,6 +99,10 @@ module.exports = {
       {
         test: /strophejs-plugins/,
         loader: 'imports-loader?Strophe=>strophe.Strophe'
+      },
+      {
+        test: /(bosh|websocket)\.js$/,
+        loader: 'imports-loader?Strophe=>strophe.Strophe,$build=>strophe.$build,define=>false'
       }
     ]
   },
