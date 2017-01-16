@@ -1,4 +1,6 @@
 /* globals strophe */
+import 'strophe.js/src/bosh';
+import 'strophe.js/src/websocket';
 import 'strophejs-plugins/roster/strophe.roster';
 import 'strophejs-plugins/disco/strophe.disco';
 import 'strophejs-plugins/vcard/strophe.vcard';
