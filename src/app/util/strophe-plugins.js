@@ -8,6 +8,10 @@ import 'strophejs-plugins/rsm/strophe.rsm';
 import 'strophejs-plugins/pubsub/strophe.pubsub';
 import 'strophejs-plugins/caps/strophe.CAPS';
 import 'strophejs-plugins/pep/strophe.pep';
+import 'strophejs-plugins/register/strophe.register';
+import 'strophejs-plugins/receipts/strophe.receipts';
+import 'strophejs-plugins/si-filetransfer/strophe.si-filetransfer';
+import 'strophejs-plugins/ibb/strophe.ibb';
 
 const { Strophe } = strophe;
 
