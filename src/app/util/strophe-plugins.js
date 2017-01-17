@@ -12,6 +12,7 @@ import 'strophejs-plugins/register/strophe.register';
 import 'strophejs-plugins/receipts/strophe.receipts';
 import 'strophejs-plugins/si-filetransfer/strophe.si-filetransfer';
 import 'strophejs-plugins/ibb/strophe.ibb';
+import 'strophejs-plugins/chatstates/strophe.chatstates';
 
 const { Strophe } = strophe;
 
